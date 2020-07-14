@@ -12,7 +12,11 @@
 <body>
     <div class="userInfo">
         <figure class="image is-128x128">
-            <img class="is-rounded" src="<%= client.user.avatarURL %>">
+            <% if(client.user.avatarURL) { %>,
+                <img class="is-rounded" src="<%= client.user.avatarURL %>">
+            <% }else{  %>
+                <img class="is-rounded" src="https://cdn3.iconfinder.com/data/icons/popular-services-brands-vol-2/512/discord-512.png">
+            <%  } %>
         </figure>
         <p id ="client-user-username" style="font-size: 40px;"><%= client.user.username %></p>
         <p id ="client-user-disciminator" style="color: #7289DA">#<%= client.user.discriminator %></p>

@@ -1,6 +1,5 @@
 html{
     background-color: #2C2F33;
-    overflow-y: hidden !important;
 }
 
 .userInfo{
@@ -31,7 +30,7 @@ html{
 }
 
 #guildID{
-    background-color: #23272A !important;
+    background-color: #2C2F33 !important;
     color: white;
     width: 350px;
     border: 0px solid;
@@ -68,11 +67,11 @@ html{
     width: 1000px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 50px;
 }
 
 .eachAction {
-    display: inline-block;
-    width: fit-content;
+    display: inline;
 }
 
 .eachAction input{
@@ -86,6 +85,60 @@ html{
     color: white !important;
 }
 
-#banbtn {
+#changeServerName, #changeBotName {
+    background-color: #7289DA !important
+}
+
+#banMember, #deleteRole {
     background-color: red !important;
+}
+
+#kickMember, #changeRoleName {
+    background-color: #F5CA00 !important;
+}
+
+#createRole {
+    background-color: rgb(67, 181, 129) !important;
+}
+
+#deleterolebtn {
+    background-color: red !important;
+}
+
+.sections {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1.2px solid black;
+    padding-left: 40px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    background-color: #23272A;
+}
+
+.dots{
+    display: list-item;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+.dots .dot{
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    border-radius: 50%;   
+}
+
+.dots p {
+    color: white;
+    display: inline-block;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    text-align: center;
+    margin-left: 3px;
+    margin-right: 5px;
+}
+
+button{
+    margin-top: 2px;
 }
