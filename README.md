@@ -23,5 +23,5 @@ Here you go! You should have ElectronCurd running perferctly. Note that app list
 
 ### Linting
 
-Linting is made with ESLint so as a reference for future PR's, please obey ESLint rules in this repistory.
+Linting is made with [ESLint](https://eslint.org/) so as a reference for future PR's, please obey ESLint rules in this repistory.
 
