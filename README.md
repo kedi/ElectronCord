@@ -19,7 +19,7 @@ project is in a consistent development, many errors might occur. As also being i
 ```
 - Run `start.bat`
 
-Here you go! You should have ElectronCurd running perferctly. Note that app listens on `PORT 3000` so don't keep this port busy (:
+Here you go! You should have ElectronCord running perferctly. Note that app listens on `PORT 3000` so don't keep this port busy (:
 
 ### Linting
 
