@@ -2,7 +2,7 @@ const electron = require("electron");
 const config = require("./config.json");
 const Discord = require("discord.js");
 const express = require("express");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
 const client = new Discord.Client();
 const {app, BrowserWindow, Menu, ipcMain} = electron;
 
@@ -14,7 +14,7 @@ ExpressApp.listen(3000);
 
 ExpressApp.set("view engine", "ejs");
 ExpressApp.use("/public", express.static("public"));
-ExpressApp.use(bodyParser.urlencoded({extended: true}))
+ExpressApp.use(bodyParser.urlencoded({extended: true}));
 
 ExpressApp.get("/", async(req, res) => {
 
@@ -22,20 +22,28 @@ ExpressApp.get("/", async(req, res) => {
 
 });
 
-ExpressApp.post("/guilds/", async(req,res) => {
+ExpressApp.post("/guilds/", async(req, res) => {
 
-    let guild = await client.guilds.get(req.body.guildID)
-    if(!guild) return res.render("main", {client});
+    const guild = await client.guilds.get(req.body.guildID);
 
-    return res.render("guildUI", {client, guild});
+    if (!guild) {
+
+        return res.render("main", {client});
+
+    }
+
+    return res.render("guildUI", {client,
+        guild});
     
-})
+});
 
 
 // ExpressApp.post("/guilds", async(req,res) => {
 
-//     let guild = await client.guilds.get(req.body.guildID)
-//     if(!guild) return res.render("main", {client});
+/*
+ *     let guild = await client.guilds.get(req.body.guildID)
+ *     if(!guild) return res.render("main", {client});
+ */
     
 //     return res.render("guildUI", {client, guild});
 
@@ -65,7 +73,8 @@ app.on("ready", () => {
     });
 
     mainWindow.setMenu(null);
-    mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools();
+
 });
 
 /**
