@@ -1,0 +1,65 @@
+html{
+    background-color: #2C2F33;
+    overflow-y: hidden !important;
+}
+
+.userInfo{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-top: 100px;
+}
+
+.image{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    margin-bottom: 13px;
+}
+
+#client-user-username{
+    font-size: 30px;
+    color: #FFFFFF;
+}
+
+.userInfo p{
+    font-size: 25px;
+    display: inline-block;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+#guildID{
+    background-color: #23272A !important;
+    color: white;
+    width: 350px;
+    border: 0px solid;
+}
+
+#guildID::placeholder{
+    color: white !important;
+    font-size: 17px;
+}
+
+.searchFieldBar{
+    margin-top: 50px;
+}
+
+.searchFieldBar input{
+    margin-left: 5px;
+    background-color: #7289DA !important;
+}
+
+*:focus {
+    outline: none !important;
+}
+
+.input:focus {
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.userInfo{
+    width: max-content !important;
+}
