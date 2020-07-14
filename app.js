@@ -8,6 +8,7 @@ const {app, BrowserWindow, Menu, ipcMain} = electron;
 
 let mainWindow;
 
+
 const ExpressApp = express();
 
 ExpressApp.listen(3000);
@@ -15,6 +16,41 @@ ExpressApp.listen(3000);
 ExpressApp.set("view engine", "ejs");
 ExpressApp.use("/public", express.static("public"));
 ExpressApp.use(bodyParser.urlencoded({extended: true}));
+
+
+app.on("ready", () => {
+
+    mainWindow = new BrowserWindow({
+        width: 900,
+        height: 600,
+        resizable: true,
+        title: "Application",
+        webPreferences: {
+            nodeIntegration: true
+        }
+    });
+
+    /**
+     * We need to be sure that our bot is ready when application is up!
+     */
+    client.on("ready", () => {
+
+        mainWindow.loadURL("http://localhost:3000/");
+        mainWindow.on("closed", () => {
+
+            app.quit();
+
+        });
+    
+    });
+
+    /**
+     * I really don't like using an app with a menu. Who does tough?
+     */
+    mainWindow.setMenu(null);
+    // mainWindow.webContents.openDevTools();
+
+});
 
 ExpressApp.get("/", async(req, res) => {
 
@@ -32,50 +68,122 @@ ExpressApp.post("/guilds/", async(req, res) => {
 
     }
 
+    /**
+     * Guild rendering from the very first beginnig of the application.
+     */
     return res.render("guildUI", {client,
-        guild});
+        guild,
+        error: "",
+        success: ""});
     
 });
 
 
-// ExpressApp.post("/guilds", async(req,res) => {
-
-/*
- *     let guild = await client.guilds.get(req.body.guildID)
- *     if(!guild) return res.render("main", {client});
+/**
+ * Ban route for handling request from UI.
  */
+ExpressApp.get("/ban/:guildid", async (req, res) => {
+
+    const guild = await client.guilds.get(req.params.guildid);
+
+    if (!guild) {
+
+        return res.render("main", {client});
+
+    }
+
+    const member = await guild.members.get(req.query.userid);
+    const data = {client,
+        guild,
+        error: "",
+        success: ""};
+
+    if (!member){
+
+        data.error = `Can't find member with ID ${req.query.userid}`;
+        
+        return res.render("guildUI", data);
     
-//     return res.render("guildUI", {client, guild});
+    }
 
-// })
+    if (member.user.id === client.user.id){
 
-app.on("ready", () => {
+        data.error = `Can't ban myself. Sorry :/`;
+        
+        return res.render("guildUI", cata);
+    
+    }
 
-    mainWindow = new BrowserWindow({
-        width: 1920,
-        height: 1080,
-        resizable: true,
-        title: "Application",
-        webPreferences: {
-            nodeIntegration: true
-        }
-    });
+    return member.ban(`[Ban @ ElectronCord] ${req.query.reason || "No reason specified."}`).then(() => {
 
-    client.on("ready", () => {
+        data.success = `Sucessfully banned ${member.user.tag}`;
+        
+        return res.render("guildUI", data);
+    
+    }).
+        catch(err => {
 
-        mainWindow.loadURL("http://localhost:3000/");
-        mainWindow.on("closed", () => {
-
-            app.quit();
-
+            data.error = `Can't ban ${member.user.tag} because of ${err.message}`;
+        
+            return res.render("guildUI", data);
+    
         });
-    
-    });
-
-    mainWindow.setMenu(null);
-    mainWindow.webContents.openDevTools();
-
+        
 });
+
+
+/**
+ * Kick route for handling request from UI.
+ */
+ExpressApp.get("/kick/:guildid", async (req, res) => {
+
+    const guild = await client.guilds.get(req.params.guildid);
+
+    if (!guild) {
+
+        return res.render("main", {client});
+
+    }
+
+    const member = await guild.members.get(req.query.userid);
+    const data = {client,
+        guild,
+        error: "",
+        success: ""};
+
+    if (!member){
+
+        data.error = `Can't find member with ID ${req.query.userid}`;
+        
+        return res.render("guildUI", data);
+    
+    }
+
+    if (member.user.id === client.user.id){
+
+        data.error = `Can't kick myself. You really want me to leave? :(`;
+        
+        return res.render("guildUI", cata);
+    
+    }
+
+    return member.kick(`[Kick @ ElectronCord] ${req.query.reason || "No reason specified."}`).then(() => {
+
+        data.success = `Sucessfully kick ${member.user.tag}`;
+        
+        return res.render("guildUI", data);
+    
+    }).
+        catch(err => {
+
+            data.error = `Can't kick ${member.user.tag} because of ${err.message}`;
+        
+            return res.render("guildUI", data);
+    
+        });
+        
+});
+
 
 /**
  * The ipcMain event handler of the ipcRenderer. Returns with an overview information about client.

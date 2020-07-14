@@ -10,6 +10,18 @@
     
 </head>
 <body>
+    <% if(error) {%>
+        <div class="notification is-danger">
+            <button class="delete"></button>
+            <%= error %>
+        </div>
+    <% } else if (success) {%>
+        <div class="notification is-success">
+            <button class="delete"></button>
+            <%= success %>
+        </div>
+    <% }%>
+    
     <div class="userInfo">
         <figure class="image is-128x128">
             <% if(guild.iconURL) { %>,
@@ -45,19 +57,23 @@
             <div class="eachAction">
                 <div class="eachAction">
                     <label class="label">Kick Member</label>
-                    <div class="field">
-                        <input class="input" id= "guildID" type= "text" name="guildID" placeholder="User ID">
-                        <input class="input" id= "guildID" type= "text" name="guildID" placeholder="Kick Reason...">
-                        <button class="button is-primary" id="kickMember" type="submit">Kick</button>
-                    </div>
+                    <form action="http://localhost:3000/kick/<%= guild.id %>" method="get">
+                        <div class="field">
+                            <input class="input" id= "guildID" type= "text" name="userid" placeholder="User ID">
+                            <input class="input" id= "guildID" type= "text" name="reason" placeholder="Kick Reason...">
+                            <button class="button is-primary" id="kickMember" type="submit">Kick</button>
+                        </div>
+                    </form>
                 </div>
 
                 <label class="label">Ban Member</label>
-                <div class="field">
-                    <input class="input" id= "guildID" type= "text" name="guildID" placeholder="User ID">
-                    <input class="input" id= "guildID" type= "text" name="guildID" placeholder="Ban Reason...">
-                    <button class="button is-primary" id="banMember" type="submit">Ban</button>
-                </div>
+                <form action="http://localhost:3000/ban/<%= guild.id %>" method="get">
+                    <div class="field">
+                        <input class="input" id= "guildID" type= "text" name="userid" placeholder="User ID">
+                        <input class="input" id= "guildID" type= "text" name="reason" placeholder="Ban Reason...">
+                        <button class="button is-primary" id="banMember" type="submit">Ban</button>
+                    </div>
+                </form>
             </div>
         </div>
 

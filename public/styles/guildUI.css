@@ -1,5 +1,7 @@
 html{
     background-color: #2C2F33;
+    margin: 0;
+    padding: 0;
 }
 
 .userInfo{
@@ -141,4 +143,10 @@ html{
 
 button{
     margin-top: 2px;
+}
+
+.notification {
+    width: 300px;
+    float: right;
+    margin-right: 60px;
 }
