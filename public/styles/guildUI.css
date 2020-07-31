@@ -19,8 +19,9 @@ html{
 }
 
 #client-user-username{
-    margin-top: 40px;
+    margin-top: 17px;
     font-size: 30px;
+    margin-bottom: 10px;
     color: #FFFFFF;
 }
 
@@ -122,6 +123,7 @@ html{
     margin-right: auto;
     margin-left: auto;
     text-align: center;
+    margin-top: 4px;
 }
 
 .dots .dot{

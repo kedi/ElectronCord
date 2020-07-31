@@ -110,7 +110,7 @@ ExpressApp.get("/ban/:guildid", async (req, res) => {
 
         data.error = `Can't ban myself. Sorry :/`;
         
-        return res.render("guildUI", cata);
+        return res.render("guildUI", data);
     
     }
 
@@ -163,7 +163,7 @@ ExpressApp.get("/kick/:guildid", async (req, res) => {
 
         data.error = `Can't kick myself. You really want me to leave? :(`;
         
-        return res.render("guildUI", cata);
+        return res.render("guildUI", data);
     
     }
 
